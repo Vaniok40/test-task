@@ -1,0 +1,2 @@
+class Consent < ApplicationRecord
+end

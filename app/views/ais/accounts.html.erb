@@ -1,0 +1,22 @@
+<h1 class="mb-4">Accounts</h1>
+
+<% if @accounts.empty? %>
+  <div class="alert alert-info">No accounts found.</div>
+<% else %>
+  <div class="list-group">
+    <% @accounts.each do |account| %>
+      <div class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong><%= account["iban"] %></strong>
+          <span class="text-muted ms-2"><%= account["currency"] %></span>
+        </div>
+        <div class="d-flex align-items-center gap-3">
+          <span class="badge bg-primary fs-6">
+            <%= account["balances"]&.first&.dig("balanceAmount", "amount") %> <%= account["currency"] %>
+          </span>
+          <%= link_to "Transactions", transactions_path(account_id: account["resourceId"]), class: "btn btn-sm btn-outline-secondary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
